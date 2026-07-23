@@ -6,24 +6,20 @@ on:
   
 
 jobs:
-  build:
+  ping-konnect:
     runs-on: ubuntu-latest
-
     steps:
-      # Step 1: Checkout code
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+      - name: Ping Konnect
+        env:
+          KONNECT_CP_NAME: ${{ secrets.KONNECT_CP_NAME }}
+          KONNECT_PAT: ${{ secrets.KONNECT_PAT }}
+          KONNECT_ADDR: ${{ secrets.KONNECT_ADDR }}
+        run: |
+          deck gateway ping \
+            --konnect-control-plane-name "$KONNECT_CP_NAME" \
+            --konnect-token "$KONNECT_PAT" \
+            --konnect-addr "$KONNECT_ADDR"
 
-      # Step 3: Install dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # Step 4: Run tests
-      - name: Run tests
-        run: npm test
