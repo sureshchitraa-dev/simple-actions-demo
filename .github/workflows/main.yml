@@ -12,6 +12,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Install decK
+        run: |
+          curl -sL https://github.com/kong/deck/releases/download/v1.40.2/deck_1.40.2_linux_amd64.tar.gz | tar xz
+          sudo mv deck /usr/local/bin/
+
       - name: Ping Konnect
         env:
           KONNECT_CP_NAME: ${{ secrets.KONNECT_CP_NAME }}
@@ -22,4 +27,3 @@ jobs:
             --konnect-control-plane-name "$KONNECT_CP_NAME" \
             --konnect-token "$KONNECT_PAT" \
             --konnect-addr "$KONNECT_ADDR"
-
