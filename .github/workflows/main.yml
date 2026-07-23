@@ -31,7 +31,5 @@ jobs:
           KONNECT_PAT: ${{ vars.KONNECT_PAT }}
           KONNECT_ADDR: ${{ vars.KONNECT_ADDR }}
         run: |
-          deck gateway ping \
-            --konnect-control-plane-name "$KONNECT_CP_NAME" \
-            --konnect-token "$KONNECT_PAT" \
-            --konnect-addr "$KONNECT_ADDR"
+          deck gateway ping --konnect-control-plane-name testCP --konnect-token kpat_61wxTA7l4vuRfqT8GWWlfRtLeLbuarjWF6qQjrNnhAMifQ6oB --konnect-addr https://in.api.konghq.com
+
